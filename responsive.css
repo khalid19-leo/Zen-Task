@@ -1,0 +1,148 @@
+/* تنسيقات عامة للهواتف */
+@media only screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+  }
+
+  .header {
+    padding: 10px 15px;
+  }
+
+  .navbar {
+    gap: 10px;
+  }
+
+  .controls-container {
+    right: 10px;
+    top: 10px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .theme-toggle, .lang-toggle {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .app-container {
+    flex-direction: column;
+  }
+
+  .clock-section, .todo-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* تحسين عرض الآلة الحاسبة */
+  #calculator {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .calc-buttons {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+
+  /* تحسين المكتبة الصوتية */
+  .audio-section {
+    padding: 10px;
+  }
+
+  .audio-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-container {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* تحسين أزرار التحكم في الصوت */
+  .audio-controls {
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  /* تحسين نظام الإنجازات */
+  .pro-achievement-system {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .level-progress, .achievement-tree, .achievement-stats {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* تحسين التذييل */
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* للشاشات الصغيرة جدًا */
+@media only screen and (max-width: 480px) {
+  .time-inputs {
+    flex-direction: column;
+  }
+
+  .time-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .clock-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .time-segment {
+    margin-bottom: 15px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .todo-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .todo-btn {
+    width: 100%;
+  }
+}
+/* الزرار اللغه */
+.lang-toggle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 60px;
+  padding: 5px;
+}
+
+@media only screen and (max-width: 400px) {
+  .lang-toggle {
+    min-width: 40px;
+    padding: 3px;
+    font-size: 11px;
+  }
+} 
+* {
+  box-sizing: border-box;
+}
