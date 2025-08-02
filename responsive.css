@@ -39,17 +39,6 @@
     margin-bottom: 20px;
   }
 
-  /* تحسين عرض الآلة الحاسبة */
-  #calculator {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .calc-buttons {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-  }
 
   /* تحسين المكتبة الصوتية */
   .audio-section {
@@ -143,6 +132,3 @@
     font-size: 11px;
   }
 } 
-* {
-  box-sizing: border-box;
-}
