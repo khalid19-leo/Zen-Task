@@ -1,0 +1,19 @@
+# موارد المشروع الخارجية
+---------------------------------
+
+## الخطوط
+- خط Tajawal (من Google Fonts):
+  https://fonts.googleapis.com/css2?family=Tajawal
+
+## المكتبات الصوتية
+- أصوات من Mixkit:
+  - نغمة التنبيه: https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3
+  - نغمة الإنجاز: https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3
+  - صوت النقر: https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3
+
+## الأيقونات
+- أيقونات SVG مدمجة في الكود (بدون روابط خارجية)
+
+## المكتبات JS
+- Howler.js (لإدارة الصوتيات):
+  https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js

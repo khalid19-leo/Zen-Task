@@ -1,0 +1,364 @@
+/* ========== نظام الإنجاز المعدل ========== */
+.pro-achievement-system {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 18px;
+  padding: 25px;
+  margin: 30px auto;
+  max-width: 800px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  font-family: "Tajawal", sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.level-progress {
+  margin: 25px 0;
+  position: relative;
+}
+
+.level-bar {
+  height: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.level-fill {
+  height: 100%;
+  width: 33%;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  box-shadow: 0 2px 10px rgba(106, 17, 203, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.level-marks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  position: relative;
+}
+
+.level-dot {
+  position: relative;
+  padding-top: 24px;
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.level-dot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e9ecef;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.4s ease;
+}
+
+.level-dot::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e9ecef;
+  z-index: -1;
+}
+
+.level-dot.active {
+  color: #495057;
+  font-weight: 700;
+}
+
+.level-dot.active::before {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 3px 10px rgba(106, 17, 203, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* شجرة الإنجازات المعدلة */
+.achievement-tree {
+  text-align: center;
+  margin: 40px 0;
+  position: relative;
+}
+
+.tree {
+  position: relative;
+  height: 220px;
+  margin: 0 auto 25px;
+  width: 160px;
+  transition: all 0.5s ease;
+}
+
+.tree-part {
+  position: absolute;
+  transition: all 0.5s ease;
+}
+
+.trunk {
+  width: 32px;
+  height: 90px;
+  background: linear-gradient(to right, #8b4513 0%, #a0522d 100%);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.leaves {
+  width: 140px;
+  height: 120px;
+  background: linear-gradient(135deg, #2e8b57 0%, #3cb371 100%);
+  bottom: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 40% 40%;
+  clip-path: ellipse(25% 40% at 50% 50%);
+  box-shadow: 0 10px 20px rgba(46, 139, 87, 0.3),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fruits {
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZkNTAwIiBkPSJNMjU2IDQ4YzExNS4yIDAgMjA4IDkyLjggMjA4IDIwOHMtOTIuOCAyMDgtMjA4IDIwOFM0OCAzNzEuMiA0OCAyNTYgMTQwLjggNDggMjU2IDQ4em0wIDMyYy05Ny4yIDAtMTc2IDc4LjgtMTc2IDE3NnM3OC44IDE3NiAxNzYgMTc2IDE3Ni03OC44IDE3Ni0xNzZTMzUzLjIgODAgMjU2IDgweiIvPjwvc3ZnPg==")
+    no-repeat center;
+  background-size: 60px;
+  bottom: 50px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fruits.hidden {
+  display: block !important;
+  opacity: 0;
+}
+
+.fruits:not(.hidden) {
+  opacity: 1;
+  animation: bounceIn 0.8s ease;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: translateX(-50%) scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.water-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.water-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(46, 125, 50, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.water-btn:active {
+  transform: translateY(1px);
+}
+
+.water-btn:disabled {
+  background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* الإحصائيات المعدلة */
+.achievement-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 35px;
+  gap: 15px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  flex: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #6a11cb;
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* رسوم متحركة معدلة */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+  40% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+  60% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  80% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* تأثيرات النمو للشجرة */
+@keyframes grow {
+  from {
+    transform: translateX(-50%) scale(0.9);
+  }
+  to {
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+.growing {
+  animation: grow 0.5s ease-in-out alternate infinite;
+}
+
+/* إشعارات معدلة */
+.achievement-notification {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 18px 25px;
+  max-width: 300px;
+  z-index: 1000;
+  transform: translateY(-100px);
+  opacity: 0;
+  animation: notificationSlideIn 0.5s forwards;
+  border-left: 4px solid #4caf50;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.level-up-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 15px 40px rgba(106, 17, 203, 0.4);
+  opacity: 0;
+  animation: fadeInUp 0.6s forwards;
+}
+
+.level-up-notification h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.level-up-notification p {
+  margin: 0;
+  font-size: 18px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* تأثيرات الوضع الداكن */
+[data-theme="dark"] .pro-achievement-system {
+  background: linear-gradient(135deg, #1e1e2d 0%, #2a2a3a 100%);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .level-bar {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .stat-card {
+  background: #2a2a3a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .stat-label {
+  color: #a0a0c0;
+}

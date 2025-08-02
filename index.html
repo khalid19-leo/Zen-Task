@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="منصة تعليمية للطلاب تحتوي على مؤقت دراسي، قائمة مهام، ومكتبة صوتية"
+      data-lang-ar="منصة تعليمية للطلاب تحتوي على مؤقت دراسي، قائمة مهام، ومكتبة صوتية"
+      data-lang-en="An educational platform for students containing a study timer, to-do list, and audio library"
+    />
+    <title>Zen | Task</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="pen.css" />
+    <link rel="stylesheet" href="calculator.css" />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+      rel="stylesheet"
+    />
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "GA_MEASUREMENT_ID");
+    </script>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 class="logo">Zen | Task</h1>
+      <nav class="navbar">
+        <a
+          href="#home"
+          class="nav-link"
+          data-lang-ar="الرئيسية"
+          data-lang-en="Home"
+          >الرئيسية</a
+        >
+        <a
+          href="#about"
+          class="nav-link"
+          data-lang-ar="عن التطبيق"
+          data-lang-en="About"
+          >عن التطبيق</a
+        >
+        <a
+          href="#contact"
+          class="nav-link"
+          data-lang-ar="اتصل بنا"
+          data-lang-en="Contact Us"
+          >اتصل بنا</a
+        >
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <div class="controls-container">
+        <button class="theme-toggle" id="theme-toggle">
+          <span id="theme-icon">🌙</span>
+          <span data-lang-ar="تبديل الوضع" data-lang-en="Toggle Theme"
+            >تبديل الوضع</span
+          >
+        </button>
+        <button
+          class="lang-toggle"
+          id="lang-switcher"
+          data-lang-ar="English"
+          data-lang-en="عربي"
+        >
+          English
+        </button>
+      </div>
+
+      <section id="home" class="app-container">
+        <section class="clock-section">
+          <div class="time-inputs">
+            <div class="time-input">
+              <label data-lang-ar="ساعات" data-lang-en="Hours">ساعات</label>
+              <input
+                type="number"
+                id="hours-input"
+                min="0"
+                max="23"
+                value="0"
+              />
+            </div>
+            <div class="time-input">
+              <label data-lang-ar="دقائق" data-lang-en="Minutes">دقائق</label>
+              <input
+                type="number"
+                id="minutes-input"
+                min="0"
+                max="59"
+                value="30"
+              />
+            </div>
+            <div class="time-input">
+              <label data-lang-ar="ثواني" data-lang-en="Seconds">ثواني</label>
+              <input
+                type="number"
+                id="seconds-input"
+                min="0"
+                max="59"
+                value="0"
+              />
+            </div>
+          </div>
+
+          <div class="clock-container">
+            <div class="time-segment">
+              <div
+                class="segment-label"
+                data-lang-ar="ساعات"
+                data-lang-en="Hours"
+              >
+                ساعات
+              </div>
+              <div class="flip-card">
+                <div class="card-face" id="hours-face">00</div>
+                <div class="flip" id="hours-flip">00</div>
+              </div>
+            </div>
+
+            <div class="time-segment">
+              <div
+                class="segment-label"
+                data-lang-ar="دقائق"
+                data-lang-en="Minutes"
+              >
+                دقائق
+              </div>
+              <div class="flip-card">
+                <div class="card-face" id="minutes-face">30</div>
+                <div class="flip" id="minutes-flip">30</div>
+              </div>
+            </div>
+
+            <div class="time-segment">
+              <div
+                class="segment-label"
+                data-lang-ar="ثواني"
+                data-lang-en="Seconds"
+              >
+                ثواني
+              </div>
+              <div class="flip-card">
+                <div class="card-face" id="seconds-face">00</div>
+                <div class="flip" id="seconds-flip">00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clock-controls">
+            <button class="control-btn" id="play-btn">▶</button>
+            <button class="control-btn reset" id="reset-btn">⟳</button>
+          </div>
+        </section>
+
+        <section class="todo-section">
+          <div class="todo-container">
+            <h2
+              class="todo-header"
+              data-lang-ar="قائمة المهام 📝"
+              data-lang-en="To-do List 📝"
+            >
+              قائمة المهام 📝
+            </h2>
+
+            <form class="todo-form" id="todo-form">
+              <input
+                type="text"
+                class="todo-input"
+                id="todo-input"
+                placeholder="أضف مهمة جديدة..."
+                data-lang-ar-placeholder="أضف مهمة جديدة..."
+                data-lang-en-placeholder="Add a new task..."
+                required
+              />
+              <button
+                type="submit"
+                class="todo-btn"
+                data-lang-ar="إضافة"
+                data-lang-en="Add"
+              >
+                إضافة
+              </button>
+            </form>
+
+            <ul class="todo-list" id="todo-list"></ul>
+          </div>
+        </section>
+      </section>
+
+      <section id="calculator">
+        <div class="calc-header">
+          <h2>
+            <i class="bx bx-calculator"></i>
+            <span
+              data-lang-ar="الحاسبة العلمية"
+              data-lang-en="Scientific Calculator"
+              >الحاسبة العلمية</span
+            >
+          </h2>
+        </div>
+
+        <div class="calc-display">
+          <div id="calc-input">0</div>
+          <div id="calc-result"></div>
+        </div>
+
+        <div class="calc-buttons">
+          <button class="func-btn" data-action="clear">C</button>
+          <button class="func-btn" data-action="backspace">⌫</button>
+          <button class="func-btn" data-action="square">x²</button>
+          <button class="func-btn" data-action="cube">x³</button>
+
+          <button class="op-btn" data-value="7">7</button>
+          <button class="op-btn" data-value="8">8</button>
+          <button class="op-btn" data-value="9">9</button>
+          <button class="func-btn" data-action="divide">÷</button>
+
+          <button class="op-btn" data-value="4">4</button>
+          <button class="op-btn" data-value="5">5</button>
+          <button class="op-btn" data-value="6">6</button>
+          <button class="func-btn" data-action="multiply">×</button>
+
+          <button class="op-btn" data-value="1">1</button>
+          <button class="op-btn" data-value="2">2</button>
+          <button class="op-btn" data-value="3">3</button>
+          <button class="func-btn" data-action="subtract">-</button>
+
+          <button class="op-btn" data-value="0">0</button>
+          <button class="op-btn" data-value=".">.</button>
+          <button class="func-btn" data-action="equals">=</button>
+          <button class="func-btn" data-action="add">+</button>
+        </div>
+      </section>
+
+      <!-- المكتبه -->
+      <section id="audio-library" class="audio-section">
+        <div class="audio-header">
+          <h2>
+            📚
+            <span data-lang-ar="المكتبة الصوتية" data-lang-en="Audio Library">المكتبة الصوتية</span>
+          </h2>
+    
+          <div class="search-container">
+            <i class="bx bx-search"></i>
+            <input
+              type="text"
+              id="audio-search"
+              placeholder="ابحث عن مقطع صوتي..."
+              data-lang-ar-placeholder="ابحث عن مقطع صوتي..."
+              data-lang-en-placeholder="Search for an audio clip..."
+            />
+          </div>
+        </div>
+    
+        <div class="audio-filters">
+            <button
+              class="filter-btn active"
+              data-category="all"
+              data-lang-ar="الكل"
+              data-lang-en="All"
+            >
+            </button>
+        </div>
+    
+        <div class="reciter-filter">
+            <label for="reciter-select">اختر الشيخ:</label>
+            <select id="reciter-select">
+                <option value="all">كل الشيوخ</option>
+                <option value="minshawi">محمد صديق المنشاوي</option>
+                <option value="alafasy">ماهر العيقيلي</option>
+                <option value="abdulbasit">عبدالباسط عبدالصمد</option>
+                <option value="aldossari">ياسر الدوسري</option>
+             </select>
+        </div>
+        <!-- الازرار -->
+        <div class="audio-controls">
+  <button id="play-pause-btn" class="control-btn">
+    <i class='bx bx-play'></i>
+  </button>
+  <button id="stop-btn" class="control-btn">
+    <i class='bx bx-stop'></i>
+  </button>
+</div>
+        <!-- نهاية الازرار -->
+
+    
+        <div class="audio-list" id="audio-list"></div>
+    
+        <div class="volume-control">
+          <i class="bx bx-volume-full"></i>
+          <input type="range" id="volume-bar" min="0" max="100" value="80" />
+        </div>
+    </section>
+    
+      <section class="pro-achievement-system">
+        <div class="level-progress">
+          <div class="level-bar">
+            <span class="level-fill" data-level="1"></span>
+          </div>
+          <div class="level-marks">
+            <span
+              class="level-dot active"
+              data-level="1"
+              data-lang-ar="مبتدئ"
+              data-lang-en="Beginner"
+              >مبتدئ</span
+            >
+            <span
+              class="level-dot"
+              data-level="2"
+              data-lang-ar="متوسط"
+              data-lang-en="Intermediate"
+              >متوسط</span
+            >
+            <span
+              class="level-dot"
+              data-level="3"
+              data-lang-ar="خبير"
+              data-lang-en="Expert"
+              >خبير</span
+            >
+          </div>
+        </div>
+
+        <div class="achievement-tree">
+          <div class="tree" id="tree">
+            <div class="tree-part trunk"></div>
+            <div class="tree-part leaves"></div>
+            <div class="tree-part fruits hidden"></div>
+          </div>
+          <button
+            class="water-btn"
+            id="waterBtn"
+            data-lang-ar="سقي الشجرة!"
+            data-lang-en="Water the tree!"
+          >
+            سقي الشجرة!
+          </button>
+        </div>
+
+        <div class="achievement-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="completedTasks">0</span>
+            <span
+              class="stat-label"
+              data-lang-ar="مهام مكتملة"
+              data-lang-en="Completed Tasks"
+              >مهام مكتملة</span
+            >
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="currentLevel">1</span>
+            <span
+              class="stat-label"
+              data-lang-ar="المستوى الحالي"
+              data-lang-en="Current Level"
+              >المستوى الحالي</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container">
+          <h2
+            class="section-title"
+            data-lang-ar="عن تطبيق Study | fun"
+            data-lang-en="About Study | fun"
+          >
+            عن تطبيق Study | fun
+          </h2>
+          <div class="about-content">
+            <div class="about-card">
+              <i class="bx bx-bulb"></i>
+              <h3 data-lang-ar="فكرة التطبيق" data-lang-en="App Concept">
+                فكرة التطبيق
+              </h3>
+              <p
+                data-lang-ar="منصة متكاملة تجمع بين أدوات الدراسة والترفيه لمساعدة الطلاب على تنظيم وقتهم بطريقة ممتعة وفعالة"
+                data-lang-en="An integrated platform that combines study and entertainment tools to help students organize their time in a fun and effective way"
+              >
+                منصة متكاملة تجمع بين أدوات الدراسة والترفيه لمساعدة الطلاب على
+                تنظيم وقتهم بطريقة ممتعة وفعالة
+              </p>
+            </div>
+            <div class="about-card">
+              <i class="bx bx-group"></i>
+              <h3 data-lang-ar="فريق العمل" data-lang-en="Team">فريق العمل</h3>
+              <p
+                data-lang-ar=" تطوير: خالد عادل  تصميم: فريق Study | fun مراجعة: مجموعة من المعلمين"
+                data-lang-en="Development: Khaled Adel Design: Study | fun Team Review: A group of teachers"
+              >
+                تطوير: خالد عادل<br />تصميم: فريق Zen | Task<br />مراجعة: مجموعة
+                من المعلمين
+              </p>
+            </div>
+            <div class="about-card">
+              <i class="bx bx-star"></i>
+              <h3 data-lang-ar="لماذا نحن؟" data-lang-en="Why Us?">
+                لماذا نحن؟
+              </h3>
+              <p
+                data-lang-ar="نقدم حلولاً مبتكرة تجمع بين الجدية في الدراسة والمتعة في التعلم لتحقيق أفضل النتائج"
+                data-lang-en="We offer innovative solutions that combine seriousness in studying with fun in learning to achieve the best results"
+              >
+                نقدم حلولاً مبتكرة تجمع بين الجدية في الدراسة والمتعة في التعلم
+                لتحقيق أفضل النتائج
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="contact-container">
+          <h2
+            class="section-title"
+            data-lang-ar="اتصل بنا"
+            data-lang-en="Contact Us"
+          >
+            اتصل بنا
+          </h2>
+
+          <form
+            action="https://formspree.io/f/myzppnjj"
+            method="POST"
+            class="contact-form"
+            id="contact-form"
+          >
+            <div class="form-group">
+              <label
+                for="name"
+                data-lang-ar="الاسم بالكامل"
+                data-lang-en="Full Name"
+                >الاسم بالكامل</label
+              >
+              <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="email"
+                data-lang-ar="البريد الإلكتروني"
+                data-lang-en="Email Address"
+                >البريد الإلكتروني</label
+              >
+              <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="subject" data-lang-ar="الموضوع" data-lang-en="Subject"
+                >الموضوع</label
+              >
+              <input type="text" id="subject" name="subject" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message" data-lang-ar="الرسالة" data-lang-en="Message"
+                >الرسالة</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="submit-btn"
+              data-lang-ar="إرسال الرسالة"
+              data-lang-en="Send Message"
+            >
+              إرسال الرسالة
+            </button>
+          </form>
+
+          <div class="social-buttons-container">
+            <a
+              href="https://www.linkedin.com/in/khaled-adel-b4b717373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              class="button button--linkedin"
+              target="_blank"
+            >
+              <span class="icon">
+                <svg
+                  fill="none"
+                  height="33"
+                  viewBox="0 0 120 120"
+                  width="33"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-rule="evenodd" fill-rule="evenodd">
+                    <path
+                      d="m120 60.0002c0 33.1366-26.8633 59.9998-60 59.9998-33.138 0-60-26.8632-60-59.9998 0-33.1376 26.8617-60.0002 60-60.0002 33.1364.00031715 60 26.8626 60 60.0002z"
+                      fill="#0077b5"
+                    ></path>
+                    <g fill="#fff">
+                      <path
+                        d="m63.8771 54.3451c.2959-.3181.411-.4154.4938-.5356 4.0325-5.884 9.7919-7.6141 16.5119-6.5811 7.7657 1.1953 12.7354 6.6312 14.004 14.949.3009 1.9723.4506 3.9525.449 5.9464-.0047 8.2817-.0177 16.563.0178 24.844.0054.9327-.2242 1.2067-1.1801 1.195-4.3386-.052-8.6787-.0514-13.0179 0-.9493.0104-1.1925-.2601-1.1874-1.1944.0352-7.7238.0228-15.4472.0152-23.1703-.0029-1.7554-.1234-3.4997-.6169-5.1996-1.5816-5.4524-7.7846-7.3664-12.2018-3.7408-2.3866 1.9581-3.3196 4.5473-3.3015 7.5947.0386 7.2858.0114 14.5713.0114 21.8571 0 .9558-.0533 1.9146.0162 2.8647.0608.8259-.2766.9848-1.0248.98-4.4194-.0298-8.8379-.033-13.2567.0019-.8017.0063-1.09-.1567-1.0808-1.038.0647-6.5672.091-13.1375.0939-19.7052.0012-8.0822-.0149-16.1637-.0714-24.2455-.006-.8848.1792-1.1465 1.0932-1.1363 4.4194.0495 8.8383.0422 13.2571.0051.7957-.0073 1.0177.2321.9923 1.0063-.0549 1.6656-.0165 3.3335-.0165 5.3026z"
+                      ></path>
+                      <path
+                        d="m40.1241 71.1028c0 7.2826-.0155 14.5659.0187 21.8491.0038.9045-.1785 1.2264-1.1645 1.2134-4.377-.0584-8.7549-.0447-13.1324-.0079-.8129.0066-1.0869-.1963-1.086-1.0507.0213-14.6861.0178-29.3712-.0041-44.0569-.0009-.765.1856-1.0209.9882-1.0133 4.4579.038 8.9154.0428 13.3722-.0032.8896-.0098 1.0279.3149 1.0244 1.1008-.027 7.3235-.0152 14.6458-.0165 21.9687z"
+                      ></path>
+                      <path
+                        d="m32.5678 25.8388c5.8726.0064 9.6878 4.6579 8.2959 10.1135-1.0517 4.1194-5.3122 6.491-10.2299 5.6924-5.2234-.8477-8.1348-5.9452-6.21-10.8714 1.2013-3.0767 4.2757-4.9392 8.144-4.9345z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <span class="text1">Follow me</span>
+              <span class="text2">1,2k</span>
+            </a>
+
+            <a
+              href="
+            https://x.com/khaled_Lm19?t=APchtmq7Kx24PMV5Xx0hNA&s=09"
+              class="button button--twitter"
+              target="_blank"
+            >
+              <span class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="33"
+                  height="33"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.321 0-6.007 2.686-6.007 6.007 0 .47.054.927.156 1.362-4.99-.253-9.43-2.646-12.4-6.27-.517.882-.815 1.907-.815 3.003 0 2.083 1.065 3.93 2.673 5.021-.98-.031-1.896-.301-2.696-.744v.075c0 2.902 2.067 5.334 4.803 5.88-.5.135-1.03.207-1.576.207-.387 0-.763-.037-1.124-.108.764 2.381 2.977 4.12 5.602 4.169-2.052 1.609-4.646 2.57-7.481 2.57-.487 0-.965-.029-1.432-.084 2.644 1.705 5.795 2.691 9.205 2.691 11.045 0 17.102-9.14 17.102-17.062 0-.259-.006-.516-.018-.773 1.171-.849 2.193-1.905 3-3.124"
+                  />
+                </svg>
+              </span>
+              <span class="text1">Follow me</span>
+              <span class="text2">2,5k</span>
+            </a>
+
+            <a
+              href="https://github.com/khalid19-leo"
+              class="button button--github"
+              target="_blank"
+            >
+              <span class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="33"
+                  height="33"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.6.111.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.334-1.756-1.334-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.419-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.29-1.552 3.295-1.23 3.295-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.801 5.626-5.476 5.92-.42.365-.819 1.094-.819 2.215 0 1.606.014 2.897.014 3.297 0 .319.219.699.829.577 4.769-1.587 8.2-6.085 8.2-11.387c0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+              </span>
+              <span class="text1">Follow me</span>
+              <span class="text2">20k</span>
+            </a>
+
+            <a
+              href="mailto:div.khaled.Adel@gmail.com"
+              class="button button--googlemail"
+              target="_blank"
+            >
+              <span class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="33"
+                  height="33"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"
+                  />
+                </svg>
+              </span>
+              <span class="text1">Email me</span>
+              <span class="text2">20k</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3 data-lang-ar="روابط سريعة" data-lang-en="Quick Links">
+            روابط سريعة
+          </h3>
+          <ul>
+            <li>
+              <a href="#home" data-lang-ar="الرئيسية" data-lang-en="Home"
+                >الرئيسية</a
+              >
+            </li>
+            <li>
+              <a href="#about" data-lang-ar="عن التطبيق" data-lang-en="About"
+                >عن التطبيق</a
+              >
+            </li>
+            <li>
+              <a
+                href="#contact"
+                data-lang-ar="اتصل بنا"
+                data-lang-en="Contact Us"
+                >اتصل بنا</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3 data-lang-ar="الشروط والسياسات" data-lang-en="Terms and Policies">
+            الشروط والسياسات
+          </h3>
+          <ul>
+            <li>
+              <a
+                href="terms.html"
+                data-lang-ar="شروط الخدمة"
+                data-lang-en="Terms of Service"
+                >شروط الخدمة</a
+              >
+            </li>
+            <li>
+              <a
+                href="privacy.html"
+                data-lang-ar="سياسة الخصوصية"
+                data-lang-en="Privacy Policy"
+                >سياسة الخصوصية</a
+              >
+            </li>
+        </div>
+
+        <div class="footer-section">
+          <h3 data-lang-ar="اتصل بنا" data-lang-en="Contact Us">اتصل بنا</h3>
+          <div class="contact-info">
+            <p>
+              <i class="fas fa-envelope"></i>
+              <span data-lang-ar="البريد الإلكتروني" data-lang-en="Email"
+                >البريد الإلكتروني</span
+              >: dev.khaled.adel@gmail.com
+            </p>
+            <p>
+              <i class="fab fa-whatsapp"></i>
+              <span data-lang-ar="هاتف" data-lang-en="Phone">هاتف</span>: +20
+              01093270155
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>
+          &copy; 2025 Zen | Task.
+          <span
+            data-lang-ar="جميع الحقوق محفوظة. تم التصميم بواسطة خالد عادل."
+            data-lang-en="All Rights Reserved. Designed by Khaled Adel."
+            >جميع الحقوق محفوظة. تم التصميم بواسطة خالد عادل.</span
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="pen.js"></script>
+    <script src="calculator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ar.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const langSwitcher = document.getElementById("lang-switcher");
+        const html = document.documentElement;
+        let currentLang = "ar";
+
+        // Function to update all text on the page
+        const updateLanguage = () => {
+          const newLang = currentLang === "ar" ? "en" : "ar";
+
+          // Update all elements with data attributes
+          document.querySelectorAll("[data-lang-ar]").forEach((element) => {
+            element.textContent = element.getAttribute(`data-lang-${newLang}`);
+          });
+
+          // Update placeholder texts specifically
+          document
+            .querySelectorAll("[data-lang-ar-placeholder]")
+            .forEach((element) => {
+              element.setAttribute(
+                "placeholder",
+                element.getAttribute(`data-lang-${newLang}-placeholder`)
+              );
+            });
+
+          // Update page direction and language attribute
+          html.lang = newLang;
+          html.dir = newLang === "ar" ? "rtl" : "ltr";
+
+          // Update language switcher button text
+          langSwitcher.textContent = newLang === "ar" ? "English" : "عربي";
+
+          currentLang = newLang;
+        };
+
+        langSwitcher.addEventListener("click", updateLanguage);
+      });
+    </script>
+  </body>
+</html>
