@@ -1,107 +1,72 @@
-    /* تنسيقات عامة للجوال */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-
-  .header {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
-  }
-
-  .main-content {
-    padding: 10px;
-  }
-
-  /* إصلاح الآلة الحاسبة */
-  #calculator {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .calc-buttons {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-  }
-
-  .calc-buttons button {
-    padding: 10px 5px;
-    font-size: 14px;
-  }
-
-  /* إصلاح التذييل */
-  .footer-container {
-    flex-direction: column;
-  }
-
-  .footer-section {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  /* إصلاح أزرار التواصل */
-  .social-buttons-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .button {
-    width: 100%;
-  }
-
-  /* إصلاح القوائم */
-  ul {
-    padding-left: 15px;
-  }
-}
-
-/* للشاشات الصغيرة جدًا */
-@media (max-width: 480px) {
-  .time-inputs {
-    flex-direction: column;
-  }
-
-  .clock-container {
-    flex-direction: column;
-  }
-
-  .todo-form {
-    flex-direction: column;
-  }
-
-  .contact-form .form-group {
-    width: 100%;
-  }
-}
-/* إصلاح مشاكل اللغة */
-[dir="rtl"] .navbar {
-  padding-right: 0;
-}
-
-/* إصلاح التباعد في القوائم */
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-
-/* إصلاح أزرار المتابعة */
-.button--linkedin, 
-.button--twitter,
-.button--github,
-.button--googlemail {
-  justify-content: space-between;
-  padding: 8px 15px;
-}
-
-/* إصلاح تنسيق جهات الاتصال */
-.contact-info p {
-  margin-bottom: 10px;
+/* إصلاح التمركز العام */
+body {
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   align-items: center;
-  gap: 5px;
 }
+
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* إصلاح عناصر المكتبة الصوتية */
+.audio-section {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* إصلاح الساعة */
+.clock-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* إصلاح القوائم */
+.navbar, .footer-section ul {
+  width: 100%;
+  text-align: center;
+}
+
+/* منع العناصر من الخروج عن الشاشة */
+* {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.audio-header {
+  text-align: center;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.reciter-filter {
+  text-align: center;
+  margin: 15px 0;
+}
+
+#reciter-select {
+  width: 100%;
+  max-width: 250px;
+} 
+
+.clock-container {
+  width: 100%;
+  justify-content: center;
+}
+
+.time-segment {
+  margin: 0 5px;
+}
+
+.time-inputs {
+  justify-content: center;
+} 
