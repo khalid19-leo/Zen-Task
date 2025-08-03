@@ -380,3 +380,7 @@ function testNotifications() {
     document.dispatchEvent(event);
   }, 2000);
 }
+
+// اغلاق الاعلان
+
+
